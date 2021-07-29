@@ -1,0 +1,16 @@
+version: "2.1"
+services:
+  bazarr:
+    image: ghcr.io/linuxserver/bazarr
+    container_name: bazarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ} # Specify a timezone to use
+    volumes:
+      - ${CONFIG_PATH}/bazarr:/config
+      - ${MEDIA_PATH}/tv:/data/media/tv
+      - ${MEDIA_PATH}/movies:/data/media/movies
+    ports:
+      - 6767:6767
+    restart: unless-stopped

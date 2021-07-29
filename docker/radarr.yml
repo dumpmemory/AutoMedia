@@ -1,0 +1,17 @@
+version: "2.1"
+services:
+  radarr:
+    image: ghcr.io/linuxserver/radarr
+    container_name: radarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${CONFIG_PATH}/radarr:/config
+      - ${ROOT}:/data # Location of all your media
+      - ${DOWNLOAD_PATH}/movies:/data/downloads/torrents/movies
+
+    ports:
+      - 7878:7878
+    restart: unless-stopped
