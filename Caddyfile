@@ -7,18 +7,22 @@ jellyfin.adamnor.com {
 	reverse_proxy jellyfin:8096
 }
 
-deluge.adamnor.com {
-	reverse_proxy deluge:8112
-}
+# deluge.adamnor.com {
+# 	reverse_proxy deluge:8112
+# }
 
-radarr.adamnor.com {
-	reverse_proxy radarr:7878
-}
+# radarr.adamnor.com {
+# 	reverse_proxy radarr:7878
+# }
 
-sonarr.adamnor.com {
-	reverse_proxy sonarr:8989
-}
+# sonarr.adamnor.com {
+# 	reverse_proxy sonarr:8989
+# }
 
-jackett.adamnor.com {
-	reverse_proxy jackett:9117
+# jackett.adamnor.com {
+# 	reverse_proxy jackett:9117
+# }
+
+status.adamnor.com {
+	reverse_proxy uptime-kuma:3001
 }
