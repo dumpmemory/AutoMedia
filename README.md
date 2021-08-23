@@ -1,5 +1,16 @@
 # media-server
 Welcome to Adamnor Cloud Services™
+## Sonarr
+Enable `Rename Episodes`
+| Setting                 | Value                               |
+|-------------------------|-------------------------------------|
+| Standard Episode Format | Episode S{season:00}E{episode:00} - |
+| Daily Episode Format    | Episode S{season:00}E{episode:00} - |
+| Anime Episode Format    | Episode S{season:00}E{episode:00} - |
+| Series Folder Format    | {Series TitleYear}                  |
+| Season Folder Format    | Season {season:00}                  |
+| Specials Folder Format  | Specials                            |
+| Multi-Episode Style     | Scene                               |
 
 ## Folder Structure
 <!-- We're going to use a mounted drive that we're going to use as storage for downloads and your media. In this example the mounted drive will be mounted to /mnt/ with the following folder structure. -->
