@@ -1,4 +1,5 @@
 # media-server
+Welcome to Adamnor Cloud Services™
 
 ## Folder Structure
 <!-- We're going to use a mounted drive that we're going to use as storage for downloads and your media. In this example the mounted drive will be mounted to /mnt/ with the following folder structure. -->
@@ -18,7 +19,7 @@ data
     └───tv
 ```
 
-## Example docker-compose
+<!-- ## Example docker-compose
 ```docker
 version: "3.2"
 services:
@@ -91,4 +92,4 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /docker/appdata/sabnzbd:/config
       - /data/usenet:/data/usenet:rw
-```
+``` -->
