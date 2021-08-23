@@ -1,0 +1,12 @@
+:80 {
+ reverse_proxy jellyfin:8096
+}
+
+adamnor.com {
+  root * /srv
+  file_server
+}
+
+jellyfin.adamnor.com {
+ reverse_proxy jellyfin:8096
+}

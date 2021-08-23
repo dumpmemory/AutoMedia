@@ -4,15 +4,20 @@ services:
   caddy:
     image: caddy:latest
     container_name: caddy
-    volumes:
-      # - ${CONFIG_PATH}/Caddyfile:/etc/caddy/Caddyfile
-      - $PWD/site:/srv
-      - caddy_data:/data
-      - ${CONFIG_PATH}/caddy:/config
+    restart: unless-stopped
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ} # Specify a timezone to use
     ports:
       - 80:80
       - 443:443
-    restart: unless-stopped
+    volumes:
+      # - ${CONFIG_PATH}/Caddyfile:/etc/caddy/Caddyfile
+      - ${PWD}/Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - ${PWD}/site:/srv
+      - ${CONFIG_PATH}/caddy:/config
 
 volumes:
   caddy_data:
