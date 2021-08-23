@@ -1,12 +1,24 @@
-:80 {
- reverse_proxy jellyfin:8096
-}
-
 adamnor.com {
-  root * /srv
-  file_server
+	root * /srv
+	file_server
 }
 
 jellyfin.adamnor.com {
- reverse_proxy jellyfin:8096
+	reverse_proxy jellyfin:8096
+}
+
+deluge.adamnor.com {
+	reverse_proxy deluge:8112
+}
+
+radarr.adamnor.com {
+	reverse_proxy radarr:7878
+}
+
+sonarr.adamnor.com {
+	reverse_proxy sonarr:8989
+}
+
+jackett.adamnor.com {
+	reverse_proxy jackett:9117
 }
