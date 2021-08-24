@@ -9,8 +9,7 @@ services:
       - TZ=${TZ} # Specify a timezone to use
     volumes:
       - ${CONFIG_PATH}/bazarr:/config
-      - ${MEDIA_PATH}/tv:/data/media/tv
-      - ${MEDIA_PATH}/movies:/data/media/movies
+      - ${ROOT}/:/data
     ports:
       - 6767:6767
     restart: unless-stopped

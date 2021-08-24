@@ -9,8 +9,7 @@ services:
       - TZ=${TZ} # Specify a timezone to use
     volumes:
       - ${CONFIG_PATH}/sonarr:/config # Contains all relevant configuration files.
-      - ${ROOT}:/data # Location of all your media
-      - ${DOWNLOAD_PATH}/tv:/data/downloads/torrents/tv
+      - ${ROOT}/:/data
     ports:
       - 8989:8989/tcp # Web UI
     restart: unless-stopped

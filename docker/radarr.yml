@@ -8,9 +8,8 @@ services:
       - PGID=${PGID}
       - TZ=${TZ}
     volumes:
-      - ${CONFIG_PATH}/radarr:/config
-      - ${ROOT}:/data # Location of all your media
-      - ${DOWNLOAD_PATH}/movies:/data/downloads/torrents/movies
+      - ${CONFIG_PATH}/radarr:/config # Contains all relevant configuration files.
+      - ${ROOT}/:/data
 
     ports:
       - 7878:7878

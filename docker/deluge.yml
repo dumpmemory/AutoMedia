@@ -12,7 +12,7 @@ services:
       - DELUGE_LOGLEVEL=error #optional
     volumes:
       - ${CONFIG_PATH}/deluge:/config
-      - ${DOWNLOAD_PATH}/:/data/downloads/torrents
+      - ${DOWNLOAD_PATH}/:/data/torrents
     ports:
       - 8112:8112 # webui
       - 58846:58846 # daemon

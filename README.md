@@ -24,19 +24,21 @@ Enable `Rename Episodes`
 <!-- We're going to use a mounted drive that we're going to use as storage for downloads and your media. In this example the mounted drive will be mounted to /mnt/ with the following folder structure. -->
 ```
 data
-├───downloads
-│   └───usenet
-│   └───torrents
-│       ├───blackhole
-│       ├───books
-│       ├───movies
-│       ├───music
-│       └───tv
-└───media
-    ├───books
-    ├───movies
-    └───tv
+├── torrents
+│  ├── movies
+│  ├── music
+│  └── tv
+├── usenet
+│  ├── movies
+│  ├── music
+│  └── tv
+└── media
+   ├── movies
+   ├── music
+   └── tv
 ```
+### Credits: 
+- https://trash-guides.info/Hardlinks/How-to-setup-for/Docker/
 
 <!-- ## Example docker-compose
 ```docker
