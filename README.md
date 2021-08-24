@@ -1,5 +1,13 @@
 # media-server
 Welcome to Adamnor Cloud Services™
+## Radarr
+Enable `Rename Episodes`
+
+| Setting               | Value                                         |
+|-----------------------|-----------------------------------------------|
+| Colon Replacement     | Delete                                        |
+| Standard Movie Format | {Movie Title} ({Release Year}) {Quality Full} |
+| Movie Folder Format   | {Movie Title} ({Release Year})                |
 ## Sonarr
 Enable `Rename Episodes`
 | Setting                 | Value                               |
