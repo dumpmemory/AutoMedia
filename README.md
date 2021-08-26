@@ -37,6 +37,12 @@ data
    ├── music
    └── tv
 ```
+### TODO:
+- Proxy for deluge
+- 
+
+
+
 ### Credits: 
 - https://trash-guides.info/Hardlinks/How-to-setup-for/Docker/
 
