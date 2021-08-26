@@ -1,5 +1,9 @@
+www.adamnor.com {
+	redir https://adamnor.com{uri}
+}
+
 adamnor.com {
-	root * /srv
+	root * /srv/landing-page
 	file_server
 }
 
@@ -7,22 +11,29 @@ jellyfin.adamnor.com {
 	reverse_proxy jellyfin:8096
 }
 
-# deluge.adamnor.com {
-# 	reverse_proxy deluge:8112
-# }
+status.adamnor.com {
+	reverse_proxy uptime-kuma:3001
+}
 
-# radarr.adamnor.com {
-# 	reverse_proxy radarr:7878
-# }
+deluge.adamnor.com {
+	root * /srv/soon
+	file_server
+	# reverse_proxy deluge:8112
+}
 
-# sonarr.adamnor.com {
+radarr.adamnor.com {
+	root * /srv/soon
+	file_server
+	# reverse_proxy radarr:7878
+}
+
+sonarr.adamnor.com {
+	root * /srv/soon
+	file_server
 # 	reverse_proxy sonarr:8989
-# }
+}
 
 # jackett.adamnor.com {
 # 	reverse_proxy jackett:9117
 # }
 
-status.adamnor.com {
-	reverse_proxy uptime-kuma:3001
-}

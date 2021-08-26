@@ -15,7 +15,8 @@ services:
     volumes:
       # - ${CONFIG_PATH}/Caddyfile:/etc/caddy/Caddyfile
       - ${PWD}/Caddyfile:/etc/caddy/Caddyfile
-      - ${PWD}/site:/srv
+      - ${PWD}/sites/landing-page:/srv/landing-page
+      - ${PWD}/sites/soon:/srv/soon
       - ${CONFIG_PATH}/caddy:/config
       - caddy_data:/data
 
