@@ -4,18 +4,19 @@ services:
   deluge:
     image: ghcr.io/linuxserver/deluge
     container_name: deluge
+    network_mode: "service:gluetun"
     environment:
       - PUID=${PID}
       - PGID=${GID}
       - TZ=${TZ}
-      - UMASK_SET=022 #optional
+      - UMASK=022 #optional
       - DELUGE_LOGLEVEL=error #optional
     volumes:
       - ${CONFIG_PATH}/deluge:/config
       - ${DOWNLOAD_PATH}/:/data/torrents
-    ports:
-      - 8112:8112 # webui
-      - 58846:58846 # daemon
-      - 6881:6881 # bittorrent
-      - 6881:6881/udp # bittorrent
+    # ports:
+    #   - 8112:8112 # webui
+    #   - 58846:58846 # daemon
+    #   - 6881:6881 # bittorrent
+    #   - 6881:6881/udp # bittorrent
     restart: unless-stopped
