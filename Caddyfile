@@ -3,7 +3,7 @@ www.adamnor.com {
 }
 
 adamnor.com {
-	root * /srv/landing-page
+	root * /srv/sites/landing-page
 	file_server
 }
 
@@ -16,19 +16,19 @@ status.adamnor.com {
 }
 
 deluge.adamnor.com {
-	root * /srv/soon
+	root * /srv/sites/soon
 	file_server
 	# reverse_proxy deluge:8112
 }
 
 radarr.adamnor.com {
-	root * /srv/soon
+	root * /srv/sites/soon
 	file_server
 	# reverse_proxy radarr:7878
 }
 
 sonarr.adamnor.com {
-	root * /srv/soon
+	root * /srv/sites/soon
 	file_server
 # 	reverse_proxy sonarr:8989
 }
