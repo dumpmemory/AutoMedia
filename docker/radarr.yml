@@ -3,6 +3,7 @@ services:
   radarr:
     image: ghcr.io/linuxserver/radarr
     container_name: radarr
+    network_mode: "service:gluetun"
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
@@ -10,7 +11,6 @@ services:
     volumes:
       - ${CONFIG_PATH}/radarr:/config # Contains all relevant configuration files.
       - ${ROOT}/:/data
-
-    ports:
-      - 7878:7878
+    # ports:
+    #   - 7878:7878
     restart: unless-stopped

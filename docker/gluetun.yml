@@ -23,6 +23,9 @@ services:
       # Sonarr
       - 8989:8989/tcp # Web UI
 
+      # Radarr
+      - 7878:7878
+
     # command:
     volumes:
       - ${CONFIG_PATH}/gluetun:/config
