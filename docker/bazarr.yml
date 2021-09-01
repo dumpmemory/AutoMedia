@@ -3,6 +3,7 @@ services:
   bazarr:
     image: ghcr.io/linuxserver/bazarr
     container_name: bazarr
+    network_mode: "service:gluetun"
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
@@ -10,6 +11,6 @@ services:
     volumes:
       - ${CONFIG_PATH}/bazarr:/config
       - ${ROOT}/:/data
-    ports:
-      - 6767:6767
+    # ports:
+    #   - 6767:6767
     restart: unless-stopped

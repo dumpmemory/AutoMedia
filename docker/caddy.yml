@@ -13,14 +13,14 @@ services:
       - 80:80
       - 443:443
     volumes:
-      # - ${CONFIG_PATH}/Caddyfile:/etc/caddy/Caddyfile
       - ${PWD}/Caddyfile:/etc/caddy/Caddyfile
 
+      # Sites
       - ${PWD}/sites/assets:/srv/sites/landing-page/assets
       - ${PWD}/sites/assets:/srv/sites/soon/assets
-
       - ${PWD}/sites/landing-page:/srv/sites/landing-page
       - ${PWD}/sites/soon:/srv/sites/soon
+
       - ${CONFIG_PATH}/caddy:/config
       - caddy_data:/data
 

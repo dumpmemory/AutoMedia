@@ -25,6 +25,9 @@ services:
 
       # Radarr
       - 7878:7878
+      
+      # Bazarr
+      - 6767:6767
 
     # command:
     volumes:
