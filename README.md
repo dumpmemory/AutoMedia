@@ -38,8 +38,8 @@ data
    └── tv
 ```
 ### TODO:
-- Proxy for deluge
-- 
+- [x] Proxy/VPN for deluge
+  - Added via gluetun 
 
 
 
