@@ -1,33 +1,40 @@
 www.adamnor.com {
+	import /etc/caddy/caddy_security.conf
 	redir https://adamnor.com{uri}
 }
 
 adamnor.com {
+	import /etc/caddy/caddy_security.conf
 	root * /srv/sites/landing-page
 	file_server
 }
 
 jellyfin.adamnor.com {
+	import /etc/caddy/caddy_security.conf
 	reverse_proxy jellyfin:8096
 }
 
 status.adamnor.com {
+	import /etc/caddy/caddy_security.conf
 	reverse_proxy uptime-kuma:3001
 }
 
 deluge.adamnor.com {
+	import /etc/caddy/caddy_security.conf
 	root * /srv/sites/soon
 	file_server
 	# reverse_proxy deluge:8112
 }
 
 radarr.adamnor.com {
+	import /etc/caddy/caddy_security.conf
 	root * /srv/sites/soon
 	file_server
 	# reverse_proxy radarr:7878
 }
 
 sonarr.adamnor.com {
+	import /etc/caddy/caddy_security.conf
 	root * /srv/sites/soon
 	file_server
 # 	reverse_proxy sonarr:8989
