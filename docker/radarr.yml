@@ -10,7 +10,7 @@ services:
       - TZ=${TZ}
     volumes:
       - ${CONFIG_PATH}/radarr:/config # Contains all relevant configuration files.
-      - ${ROOT}/:/data
+      - ${DATA_PATH}:/data
     # ports:
     #   - 7878:7878
     restart: unless-stopped

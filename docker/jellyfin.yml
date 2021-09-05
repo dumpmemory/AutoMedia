@@ -9,7 +9,7 @@ services:
       - TZ=${TZ} # Specify a timezone to use
     volumes:
       - ${CONFIG_PATH}/jellyfin:/config
-      - ${MEDIA_PATH}:/data/media
+      - ${MEDIA_PATH}/:/data/media
     ports:
       - 8096:8096 # http webui
       # - 8920:8920 # https webui (need to setup ssl)

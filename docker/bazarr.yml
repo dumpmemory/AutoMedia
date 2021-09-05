@@ -9,8 +9,7 @@ services:
       - PGID=${PGID}
       - TZ=${TZ} # Specify a timezone to use
     volumes:
-      - ${CONFIG_PATH}/bazarr:/config
-      - ${ROOT}/:/data
+      - ${MEDIA_PATH}:/data/media
     # ports:
     #   - 6767:6767
     restart: unless-stopped

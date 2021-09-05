@@ -10,7 +10,7 @@ services:
       - TZ=${TZ} # Specify a timezone to use
     volumes:
       - ${CONFIG_PATH}/sonarr:/config # Contains all relevant configuration files.
-      - ${ROOT}/:/data
+      - ${DATA_PATH}:/data
     # ports:
     #   - 8989:8989/tcp # Web UI
     restart: unless-stopped

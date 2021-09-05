@@ -6,14 +6,14 @@ services:
     container_name: deluge
     network_mode: "service:gluetun"
     environment:
-      - PUID=${PID}
-      - PGID=${GID}
+      - PUID=${PUID}
+      - PGID=${PGID}
       - TZ=${TZ}
       - UMASK=022 #optional
       - DELUGE_LOGLEVEL=error #optional
     volumes:
       - ${CONFIG_PATH}/deluge:/config
-      - ${DOWNLOAD_PATH}/:/data/torrents
+      - ${TORRENT_DOWNLOAD}/:/data/torrents
     # ports:
     #   - 8112:8112 # webui
     #   - 58846:58846 # daemon

@@ -25,7 +25,7 @@ services:
 
       # Radarr
       - 7878:7878
-      
+
       # Bazarr
       - 6767:6767
 
@@ -49,5 +49,4 @@ services:
       - WIREGUARD_ADDRESS=${WIREGUARD_ADDRESS}
 
       - TZ=${TZ} # Timezone for accurate logs times
-
     restart: always
