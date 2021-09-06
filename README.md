@@ -40,7 +40,7 @@ data
 ### TODO:
 - [x] Proxy/VPN for deluge
   - Added via gluetun 
-- [] Implement Authentication to caddy
+- [ ] Implement Authentication to caddy
   - https://github.com/greenpau/caddy-auth-portal     
 
 
