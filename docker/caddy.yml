@@ -1,10 +1,8 @@
 version: "3.7"
-
 services:
   caddy:
-    image: caddy:latest
+    image: caddy
     container_name: caddy
-    restart: unless-stopped
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
@@ -13,18 +11,21 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - ${PWD}/Caddyfile:/etc/caddy/Caddyfile
+      - ${CADDY_FILES}/Caddyfile:/etc/caddy/Caddyfile
+      - ${CADDY_FILES}/caddy_security.conf:/etc/caddy/caddy_security.conf
 
-      # Sites
-      - ${PWD}/sites/assets:/srv/sites/landing-page/assets
-      - ${PWD}/sites/assets:/srv/sites/soon/assets
-      - ${PWD}/sites/landing-page:/srv/sites/landing-page
-      - ${PWD}/sites/soon:/srv/sites/soon
+      # assets
+      - ${CADDY_FILES}/sites/assets:/srv/sites/landing-page/assets
+      - ${CADDY_FILES}/sites/assets:/srv/sites/soon/assets
 
-      - ${CONFIG_PATH}/caddy:/config
-      - caddy_data:/data
+      # sites
+      - ${CADDY_FILES}/sites/landing-page:/srv/sites/landing-page
+      - ${CADDY_FILES}/sites/soon:/srv/sites/soon
+
+      - ${CONFIG_PATH}:/config
+      - caddy-data:/data
+    restart: unless-stopped
 
 volumes:
   caddy_data:
     external: true
-  caddy_config:
