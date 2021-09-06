@@ -185,16 +185,16 @@ services:
     # - 80:80
     # - 443:443
     volumes:
-      - /mnt/user/media-servers/config/caddy/Caddyfile:/etc/caddy/Caddyfile
-      - /mnt/user/media-servers/config/caddy/caddy_security.conf:/etc/caddy/caddy_security.conf
+      - ${CADDY_FILES}/Caddyfile:/etc/caddy/Caddyfile
+      - ${CADDY_FILES}/caddy_security.conf:/etc/caddy/caddy_security.conf
 
       # assets
-      - /mnt/user/media-servers/config/caddy/sites/assets:/srv/sites/landing-page/assets
-      - /mnt/user/media-servers/config/caddy/sites/assets:/srv/sites/soon/assets
+      - ${CADDY_FILES}/sites/assets:/srv/sites/landing-page/assets
+      - ${CADDY_FILES}/sites/assets:/srv/sites/soon/assets
 
       # sites
-      - /mnt/user/media-servers/config/caddy/sites/landing-page:/srv/sites/landing-page
-      - /mnt/user/media-servers/config/caddy/sites/soon:/srv/sites/soon
+      - ${CADDY_FILES}/sites/landing-page:/srv/sites/landing-page
+      - ${CADDY_FILES}/sites/soon:/srv/sites/soon
 
       - ${CONFIG_PATH}:/config
       - caddy-data:/data
