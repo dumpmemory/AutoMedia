@@ -1,0 +1,207 @@
+version: "3.9"
+services:
+  gluetun:
+    image: qmcgaw/gluetun
+    container_name: gluetun
+    cap_add:
+      - NET_ADMIN
+    network_mode: bridge
+    ports:
+      - 8888:8888/tcp # HTTP proxy
+      - 8388:8388/tcp # Shadowsocks
+      - 8388:8388/udp # Shadowsocks
+      - 8000:8000/tcp # Built-in HTTP control server
+
+      # Jackett
+      - 9117:9117
+
+      # Deluge
+      - 8112:8112 # webui
+      - 58846:58846 # daemon
+      - 6881:6881 # bittorrent
+      - 6881:6881/udp # bittorrent
+
+      # Sonarr
+      - 8989:8989/tcp # Web UI
+
+      # Radarr
+      - 7878:7878
+
+      # Bazarr
+      - 6767:6767
+
+      # Uptime Kuma
+      - 3001:3001
+
+      # Jellyfin
+      - 8096:8096 # http webui
+      - 8920:8920 # https webui (need to setup ssl)
+      - 7359:7359/udp # allow clients to discover jellyfin
+      - 1900:1900/udp # discover by DNLA and clients
+
+      # Caddy Reverse proxy
+      - 80:80 # http
+      - 443:443 # https
+
+    # command:
+    volumes:
+      - ${CONFIG_PATH}/gluetun:/config
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=0
+    environment:
+      # More variables are available, see the Wiki table
+      - VPNSP=${VPNSP}
+      - VPN_TYPE=${VPN_TYPE}
+
+      # - PUBLICIP_FILE=${PUBLICIP_FILE}
+      - COUNTRY=${COUNTRY}
+      - CITY=${CITY}
+      - ISP=${ISP}
+      - OWNED=${OWNED}
+      - SERVER_HOSTNAME=${SERVER_HOSTNAME}
+      - WIREGUARD_PRIVATE_KEY=${WIREGUARD_PRIVATE_KEY}
+      - WIREGUARD_ADDRESS=${WIREGUARD_ADDRESS}
+
+      - TZ=${TZ} # Timezone for accurate logs times
+    restart: always
+
+  deluge:
+    image: ghcr.io/linuxserver/deluge
+    container_name: deluge
+    network_mode: "service:gluetun"
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - UMASK=022 #optional
+      - DELUGE_LOGLEVEL=error #optional
+    volumes:
+      - ${CONFIG_PATH}/deluge:/config
+      - ${TORRENT_DOWNLOAD}/:/data/torrents
+    # ports:
+    #   - 8112:8112 # webui
+    #   - 58846:58846 # daemon
+    #   - 6881:6881 # bittorrent
+    #   - 6881:6881/udp # bittorrent
+    restart: unless-stopped
+
+  sonarr:
+    image: linuxserver/sonarr
+    container_name: sonarr
+    network_mode: "service:gluetun"
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ} # Specify a timezone to use
+    volumes:
+      - ${CONFIG_PATH}/sonarr:/config # Contains all relevant configuration files.
+      - ${DATA_PATH}:/data
+    # ports:
+    #   - 8989:8989/tcp # Web UI
+    restart: unless-stopped
+
+  radarr:
+    image: ghcr.io/linuxserver/radarr
+    container_name: radarr
+    network_mode: "service:gluetun"
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${CONFIG_PATH}/radarr:/config # Contains all relevant configuration files.
+      - ${DATA_PATH}:/data
+    # ports:
+    #   - 7878:7878
+    restart: unless-stopped
+
+  bazarr:
+    image: ghcr.io/linuxserver/bazarr
+    container_name: bazarr
+    network_mode: "service:gluetun"
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ} # Specify a timezone to use
+
+    # ports:
+    #   - 6767:6767
+    restart: unless-stopped
+
+  jellyfin:
+    image: jellyfin/jellyfin
+    container_name: jellyfin
+    network_mode: "service:gluetun"
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ} # Specify a timezone to use
+    volumes:
+      - ${CONFIG_PATH}/jellyfin:/config
+      - ${MEDIA_PATH}/:/data/media
+    #ports:
+    #- 8096:8096 # http webui
+    #- 8920:8920 # https webui (need to setup ssl)
+    #- 7359:7359/udp # allow clients to discover jellyfin
+    #- 1900:1900/udp # discover by DNLA and clients
+    restart: unless-stopped
+
+  uptime-kuma:
+    image: louislam/uptime-kuma
+    container_name: uptime-kuma
+    network_mode: "service:gluetun"
+
+    volumes:
+      - uptime-kuma:/app/data
+    #ports:
+    #  - 3001:3001
+
+  jackett:
+    image: ghcr.io/linuxserver/jackett
+    container_name: jackett
+    network_mode: "service:gluetun"
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ} # Specify a timezone to use
+      # - AUTO_UPDATE=true #optional
+      # - RUN_OPTS=<run options here> #optional
+    volumes:
+      - ${CONFIG_PATH}/jackett:/config
+      - ${TORRENT_DOWNLOAD}/blackhole:/data/torrents/blackhole
+    # ports:
+    #   - 9117:9117 # Jackett
+    restart: unless-stopped
+
+  caddy:
+    image: caddy
+    container_name: caddy
+    network_mode: "service:gluetun"
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ} # Specify a timezone to use
+    #ports:
+    # - 80:80
+    # - 443:443
+    volumes:
+      - /mnt/user/media-servers/config/caddy/Caddyfile:/etc/caddy/Caddyfile
+      - /mnt/user/media-servers/config/caddy/caddy_security.conf:/etc/caddy/caddy_security.conf
+
+      # assets
+      - /mnt/user/media-servers/config/caddy/sites/assets:/srv/sites/landing-page/assets
+      - /mnt/user/media-servers/config/caddy/sites/assets:/srv/sites/soon/assets
+
+      # sites
+      - /mnt/user/media-servers/config/caddy/sites/landing-page:/srv/sites/landing-page
+      - /mnt/user/media-servers/config/caddy/sites/soon:/srv/sites/soon
+
+      - ${CONFIG_PATH}:/config
+      - caddy-data:/data
+    restart: unless-stopped
+
+volumes:
+  uptime-kuma:
+    external: true
+  caddy-data:
+    external: true
