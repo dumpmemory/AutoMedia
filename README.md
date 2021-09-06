@@ -9,7 +9,7 @@ Enable `Rename Episodes`
 | Standard Movie Format | {Movie Title} ({Release Year}) {Quality Full} |
 | Movie Folder Format   | {Movie Title} ({Release Year})                |
 ## Sonarr
-Enable `Rename Episodes`
+Enable `Rename Episodes`Cancel changes
 | Setting                 | Value                               |
 |-------------------------|-------------------------------------|
 | Standard Episode Format | Episode S{season:00}E{episode:00} - |
@@ -40,6 +40,8 @@ data
 ### TODO:
 - [x] Proxy/VPN for deluge
   - Added via gluetun 
+- Implement Authentication to caddy
+  - https://github.com/greenpau/caddy-auth-portal     
 
 
 
