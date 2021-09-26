@@ -142,11 +142,11 @@ services:
     volumes:
       - ${CONFIG_PATH}/jellyfin:/config
       - ${MEDIA_PATH}/:/data/media
-    #ports:
-    #- 8096:8096 # http webui
-    #- 8920:8920 # https webui (need to setup ssl)
-    #- 7359:7359/udp # allow clients to discover jellyfin
-    #- 1900:1900/udp # discover by DNLA and clients
+    # ports:
+    # - 8096:8096 # http webui
+    # - 8920:8920 # https webui (need to setup ssl)
+    # - 7359:7359/udp # allow clients to discover jellyfin
+    # - 1900:1900/udp # discover by DNLA and clients
     restart: unless-stopped
 
   uptime-kuma:
@@ -156,8 +156,8 @@ services:
 
     volumes:
       - uptime-kuma:/app/data
-    #ports:
-    #  - 3001:3001
+    # ports:
+    #   - 3001:3001
 
   jackett:
     image: ghcr.io/linuxserver/jackett
@@ -184,12 +184,15 @@ services:
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TZ} # Specify a timezone to use
-    #ports:
+    # ports:
     # - 80:80
     # - 443:443
     volumes:
       - ${CADDY_FILES}/Caddyfile:/etc/caddy/Caddyfile
       - ${CADDY_FILES}/caddy_security.conf:/etc/caddy/caddy_security.conf
+      - ${CADDY_FILES}/cert.adamnor.com.pem:/etc/ssl/certs/certificate.pem
+      - ${CADDY_FILES}/cert.origin-pull.pem:/etc/ssl/certs/cert.origin-pull.pem
+      - ${CADDY_FILES}/key.adamnor.com.pem:/etc/ssl/private/key.pem
 
       # assets
       - ${CADDY_FILES}/sites/assets:/srv/sites/landing-page/assets
@@ -241,3 +244,4 @@ volumes:
     external: true
   netdatacache:
     external: true
+
