@@ -7,7 +7,7 @@ Welcome to Adamnor Cloud Services™
 - [x] Add Cloudflare end-to-end SSL CA
 - [x] Add CloudFlare DDoS protection  
 - [ ] Research nginx proxy manager vs nginx for future migration from caddy v2
-- [ ] Add authenication
+- [ ] Add authentication
    - Authelia (https://github.com/authelia/authelia) 
 - [ ] Migrate to qBittorrent    
 
