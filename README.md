@@ -1,5 +1,17 @@
 # media-server
 Welcome to Adamnor Cloud Services™
+
+## TODO:
+- [x] Proxy/VPN for deluge
+  - Added via gluetun
+- [x] Add Cloudflare end-to-end SSL CA
+- [x] Add CloudFlare DDoS protection  
+- [ ] Research nginx proxy manager vs nginx for future migration from caddy v2
+- [ ] Add authenication
+   - Authelia (https://github.com/authelia/authelia) 
+- [ ] Migrate to qBittorrent    
+
+
 ## Radarr
 Enable `Rename Episodes`
 
@@ -37,14 +49,6 @@ data
    ├── music
    └── tv
 ```
-### TODO:
-- [x] Proxy/VPN for deluge
-  - Added via gluetun 
-- [ ] Implement Authentication for caddy
-  - https://github.com/greenpau/caddy-auth-portal     
-
-
-
 ### Credits: 
 - https://trash-guides.info/Hardlinks/How-to-setup-for/Docker/
 
