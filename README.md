@@ -5,7 +5,9 @@ Welcome to Adamnor Cloud Services™
 - [x] Proxy/VPN for deluge
   - Added via gluetun
 - [x] Add Cloudflare end-to-end SSL CA
-- [x] Add CloudFlare DDoS protection  
+- [x] Add CloudFlare DDoS protection
+- [ ] Migrate to Prowlarr from Jackett
+   - Testing it atm 
 - [ ] Research nginx proxy manager vs nginx for future migration from caddy v2
 - [ ] Add authentication
    - Authelia (https://github.com/authelia/authelia) 
