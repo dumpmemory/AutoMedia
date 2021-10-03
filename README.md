@@ -1,4 +1,4 @@
-# media-server
+# media-servers
 Welcome to Adamnor Cloud Services™
 
 ## TODO:
