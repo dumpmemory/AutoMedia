@@ -15,6 +15,9 @@ services:
       # Jackett
       - 9117:9117
 
+      # Prowlarr
+      - 9696:9696
+
       # Deluge
       - 8112:8112 # webui
       - 58846:58846 # daemon
@@ -176,6 +179,20 @@ services:
     #   - 9117:9117 # Jackett
     restart: unless-stopped
 
+  prowlarr:
+    image: linuxserver/prowlarr:develop
+    container_name: prowlarr
+    network_mode: "service:gluetun"
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ} # Specify a timezone to use
+    volumes:
+      - ${CONFIG_PATH}/prowlarr:/config
+    # ports:
+    #   - 9696:9696
+    restart: unless-stopped
+
   caddy:
     image: caddy
     container_name: caddy
@@ -244,4 +261,3 @@ volumes:
     external: true
   netdatacache:
     external: true
-
