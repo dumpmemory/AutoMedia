@@ -33,6 +33,9 @@ services:
       # Bazarr
       - 6767:6767
 
+      # Readarr
+      - 8787:8787
+
       # Uptime Kuma
       - 3001:3001
 
@@ -116,6 +119,21 @@ services:
       - ${DATA_PATH}:/data
     # ports:
     #   - 7878:7878
+    restart: unless-stopped
+
+  readarr:
+    image: linuxserver/readarr:1.0.997
+    container_name: readarr
+    network_mode: "service:gluetun"
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ} # Specify a timezone to use
+    volumes:
+      - ${CONFIG_PATH}/readarr:/config
+      - ${DATA_PATH}:/data
+    # ports:
+    #   - 8787:8787
     restart: unless-stopped
 
   bazarr:
