@@ -10,8 +10,6 @@ Welcome to Adamnor Cloud Services™
 - [ ] Research nginx proxy manager vs nginx for future migration from caddy v2
 - [ ] Add authentication
    - Authelia (https://github.com/authelia/authelia) 
-- [ ] Migrate to qBittorrent    
-
 
 ## Radarr
 Enable `Rename Episodes`
