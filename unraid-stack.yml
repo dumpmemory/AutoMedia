@@ -13,7 +13,7 @@ services:
       - 8000:8000/tcp # Built-in HTTP control server
 
       # Jackett
-      - 9117:9117
+      # - 9117:9117
 
       # Prowlarr
       - 9696:9696
@@ -180,22 +180,22 @@ services:
     # ports:
     #   - 3001:3001
 
-  jackett:
-    image: ghcr.io/linuxserver/jackett
-    container_name: jackett
-    network_mode: "service:gluetun"
-    environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ} # Specify a timezone to use
-      # - AUTO_UPDATE=true #optional
-      # - RUN_OPTS=<run options here> #optional
-    volumes:
-      - ${CONFIG_PATH}/jackett:/config
-      - ${TORRENT_DOWNLOAD}/blackhole:/data/torrents/blackhole
-    # ports:
-    #   - 9117:9117 # Jackett
-    restart: unless-stopped
+  # jackett:
+  #   image: ghcr.io/linuxserver/jackett
+  #   container_name: jackett
+  #   network_mode: "service:gluetun"
+  #   environment:
+  #     - PUID=${PUID}
+  #     - PGID=${PGID}
+  #     - TZ=${TZ} # Specify a timezone to use
+  #     # - AUTO_UPDATE=true #optional
+  #     # - RUN_OPTS=<run options here> #optional
+  #   volumes:
+  #     - ${CONFIG_PATH}/jackett:/config
+  #     - ${TORRENT_DOWNLOAD}/blackhole:/data/torrents/blackhole
+  #   # ports:
+  #   #   - 9117:9117 # Jackett
+  #   restart: unless-stopped
 
   prowlarr:
     image: linuxserver/prowlarr:develop
