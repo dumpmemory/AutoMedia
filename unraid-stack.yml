@@ -82,6 +82,7 @@ services:
       - UMASK=022 #optional
       - DELUGE_LOGLEVEL=error #optional
     volumes:
+      - ${LOCAL_CONFIG}/deluge/plugins:/config/plugins
       - ${CONFIG_PATH}/deluge:/config
       - ${TORRENT_DOWNLOAD}/:/data/torrents
     # ports:
