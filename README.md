@@ -20,7 +20,7 @@ Enable `Rename Episodes`
 |-----------------------|-----------------------------------------------|
 | Colon Replacement     | Delete                                        |
 | Standard Movie Format | {Movie Title} ({Release Year}) {Quality Full} |
-| Movie Folder Format   | {Movie Title} ({Release Year})                |
+| Movie Folder Format   | {Movie Title} ({Release Year}) [tmdbid-{tmdb ID}]                |
 ## Sonarr
 Enable `Rename Episodes`Cancel changes
 | Setting                 | Value                               |
