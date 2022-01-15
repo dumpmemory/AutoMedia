@@ -16,13 +16,14 @@ Welcome to Adamnor Cloud Services™
 ## Radarr
 Enable `Rename Episodes`
 
-| Setting               | Value                                         |
-|-----------------------|-----------------------------------------------|
-| Colon Replacement     | Delete                                        |
-| Standard Movie Format | {Movie Title} ({Release Year}) {Quality Full} |
-| Movie Folder Format   | {Movie Title} ({Release Year}) [tmdbid-{tmdb ID}]                |
+| Setting               | Value                                             |
+|-----------------------|---------------------------------------------------|
+| Colon Replacement     | Delete                                            |
+| Standard Movie Format | {Movie Title} ({Release Year}) {Quality Full}     |
+| Movie Folder Format   | {Movie Title} ({Release Year}) [tmdbid-{tmdb ID}] |
+| Propers and Repacks   | Prefer and Upgrade                                |
 ## Sonarr
-Enable `Rename Episodes`Cancel changes
+Enable `Rename Episodes`
 | Setting                 | Value                               |
 |-------------------------|-------------------------------------|
 | Standard Episode Format | Episode S{season:00}E{episode:00} - |
@@ -32,6 +33,8 @@ Enable `Rename Episodes`Cancel changes
 | Season Folder Format    | Season {season:00}                  |
 | Specials Folder Format  | Specials                            |
 | Multi-Episode Style     | Scene                               |
+| Propers and Repacks     | Prefer and Upgrade                  |
+
 
 ## Folder Structure
 <!-- We're going to use a mounted drive that we're going to use as storage for downloads and your media. In this example the mounted drive will be mounted to /mnt/ with the following folder structure. -->
