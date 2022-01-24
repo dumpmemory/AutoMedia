@@ -1,5 +1,6 @@
 # media-servers
 Welcome to Adamnor Cloud Services™
+Media management hosted on a local unraid server and deployed with docker
 
 ## TODO:
 - [x] Proxy/VPN for deluge
