@@ -23,6 +23,7 @@ Enable `Rename Episodes`
 | Standard Movie Format | {Movie Title} ({Release Year}) {Quality Full}     |
 | Movie Folder Format   | {Movie Title} ({Release Year}) [tmdbid-{tmdb ID}] |
 | Propers and Repacks   | Prefer and Upgrade                                |
+
 ## Sonarr
 Enable `Rename Episodes`
 | Setting                 | Value                               |
@@ -36,9 +37,9 @@ Enable `Rename Episodes`
 | Multi-Episode Style     | Scene                               |
 | Propers and Repacks     | Prefer and Upgrade                  |
 
-
 ## Folder Structure
-<!-- We're going to use a mounted drive that we're going to use as storage for downloads and your media. In this example the mounted drive will be mounted to /mnt/ with the following folder structure. -->
+Using the following folder structure for Instant moves and hardlinks in Sonarr and Radarr
+
 ```
 data
 ├── torrents
@@ -112,22 +113,5 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /docker/appdata/bazarr:/config
       - /data/media:/data/media
-  sabnzbd:
-    container_name: sabnzbd
-    image: ghcr.io/hotio/sabnzbd:latest
-    restart: unless-stopped
-    logging:
-      driver: json-file
-    network_mode: bridge
-    ports:
-      - 8080:8080
-      - 9090:9090
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Amsterdam
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - /docker/appdata/sabnzbd:/config
-      - /data/usenet:/data/usenet:rw
+
 ``` -->
