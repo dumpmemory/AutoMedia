@@ -1,6 +1,6 @@
-# media-servers
-Welcome to Adamnor Cloud Services™
-Media management hosted on a local unraid server and deployed with docker
+# AutoMedia
+Simple docker stack for deploying a jellyfin media server with automated TV-show and Movies download through Sonarr and Radarr using Prowlarr as the indexer manager, deluge as download client and gluetun as a VPN container.
+
 
 ## TODO:
 - [x] Proxy/VPN for deluge
@@ -57,61 +57,3 @@ data
 ```
 ### Credits: 
 - https://trash-guides.info/Hardlinks/How-to-setup-for/Docker/
-
-<!-- ## Example docker-compose
-```docker
-version: "3.2"
-services:
-  radarr:
-    container_name: radarr
-    image: ghcr.io/hotio/radarr:latest
-    restart: unless-stopped
-    logging:
-      driver: json-file
-    network_mode: bridge
-    ports:
-      - 7878:7878
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Amsterdam
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - /docker/appdata/radarr:/config
-      - /data:/data
-  sonarr:
-    container_name: sonarr
-    image: ghcr.io/hotio/sonarr:latest
-    restart: unless-stopped
-    logging:
-      driver: json-file
-    network_mode: bridge
-    ports:
-      - 8989:8989
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Amsterdam
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - /docker/appdata/sonarr:/config
-      - /data:/data
-  bazarr:
-    container_name: bazarr
-    image: ghcr.io/hotio/bazarr:latest
-    restart: unless-stopped
-    logging:
-      driver: json-file
-    network_mode: bridge
-    ports:
-      - 6767:6767
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Amsterdam
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - /docker/appdata/bazarr:/config
-      - /data/media:/data/media
-
-``` -->
