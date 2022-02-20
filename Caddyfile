@@ -1,4 +1,93 @@
-(main) {
+{
+	# http_port 8080
+	# https_port 8443
+	# debug
+
+	order authenticate before respond
+	order authorize before basicauth
+
+	security {
+		authentication portal myportal {
+			crypto default token lifetime 3600
+			crypto key sign-verify {env.JWT_SHARED_KEY}
+			backend local {env.HOME}/.local/caddy/users.json local
+			# backend github {env.GITHUB_CLIENT_ID} {env.GITHUB_CLIENT_SECRET}
+			cookie domain adamnor.com
+			ui {
+				links {
+					"Dashboard" https://adamnor.com/ icon "las la-star"
+					"My Website" https://assetq.adamnor.com/ icon "las la-star"
+					"Guests" https://assetq.adamnor.com/guests icon "las la-star"
+					"Users" https://assetq.adamnor.com/users icon "las la-star"
+					"Admins" https://assetq.adamnor.com/admins icon "las la-star"
+					"My Identity" "/whoami" icon "las la-user"
+				}
+				password_recovery_enabled yes
+			}
+			transform user {
+				match origin local
+				action add role authp/user
+				ui link "Portal Settings" /settings icon "las la-cog"
+			}
+			transform user {
+				match realm github
+				match sub github.com/greenpau
+				action add role authp/user
+			}
+		}
+
+		authorization policy guests_policy {
+			# disable auth redirect
+			set auth url https://auth.adamnor.com/
+			allow roles authp/admin authp/user
+			crypto key verify {env.JWT_SHARED_KEY}
+			acl rule {
+				comment allow guests only
+				match role guest authp/guest
+				allow stop log info
+			}
+			acl rule {
+				comment default deny
+				match any
+				deny log warn
+			}
+		}
+
+		authorization policy users_policy {
+			set auth url https://auth.adamnor.com/
+			allow roles authp/admin authp/user
+			crypto key verify {env.JWT_SHARED_KEY}
+			acl rule {
+				comment allow users
+				match role authp/user
+				allow stop log info
+			}
+			acl rule {
+				comment default deny
+				match any
+				deny log warn
+			}
+		}
+
+		authorization policy admins_policy {
+			set auth url https://auth.adamnor.com/
+			allow roles authp/admin authp/user
+			crypto key verify {env.JWT_SHARED_KEY}
+			acl rule {
+				comment allow users
+				match role authp/user
+				allow stop log info
+			}
+			acl rule {
+				comment default deny
+				match any
+				deny log warn
+			}
+		}
+	}
+}
+
+(tls_config) {
 	tls /etc/ssl/certs/certificate.pem /etc/ssl/private/key.pem {
 		client_auth {
 			mode require_and_verify
@@ -6,31 +95,58 @@
 		}
 		# dns cloudflare {env.CLOUDFLARE_API_TOKEN}
 	}
+	import /etc/caddy/caddy_security.conf
 }
 
+auth.adamnor.com {
+	import tls_config
+	route {
+		authenticate with myportal
+	}
+}
+
+assetq.adamnor.com {
+	import tls_config
+	route /guests* {
+		authorize with guests_policy
+		respond * "assetq - guests only" 200
+	}
+
+	route /users* {
+		authorize with users_policy
+		respond * "assetq - users" 200
+	}
+
+	route /admins* {
+		authorize with admins_policy
+		respond * "assetq - admins" 200
+	}
+
+	route {
+		respond "assetq is running"
+	}
+}
 
 www.adamnor.com {
-	import main
-	import /etc/caddy/caddy_security.conf
+	import tls_config
 	redir https://adamnor.com{uri}
 }
 
 adamnor.com {
-	import main
-	import /etc/caddy/caddy_security.conf
+	import tls_config
+	route {
+		authorize with users_policy
+	}
 	root * /srv/sites/landing-page
 	file_server
 }
 
 jellyfin.adamnor.com {
-	import main
-	import /etc/caddy/caddy_security.conf
+	import tls_config
 	reverse_proxy localhost:8096
-
 }
 
 status.adamnor.com {
-	import main
-	import /etc/caddy/caddy_security.conf
+	import tls_config
 	reverse_proxy localhost:3001
 }
