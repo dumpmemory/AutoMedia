@@ -10,7 +10,6 @@ Simple docker stack for deploying a jellyfin media server with automated TV-show
 - [x] Migrate to Prowlarr from Jackett 
 - [x] Add unpackerr
   - https://github.com/davidnewhall/unpackerr
-- [ ] Research nginx proxy manager vs nginx for future migration from caddy v2
 - [ ] Add authentication
    - caddy-security (https://github.com/greenpau/caddy-security) 
 
