@@ -7,12 +7,17 @@
 	order authorize before basicauth
 
 	security {
+		local identity store localdb {
+			realm local
+			path {env.HOME}/.local/caddy/users.json
+		}
+
 		authentication portal myportal {
 			crypto default token lifetime 3600
 			crypto key sign-verify {env.JWT_SHARED_KEY}
-			backend local {env.HOME}/.local/caddy/users.json local
 			# backend github {env.GITHUB_CLIENT_ID} {env.GITHUB_CLIENT_SECRET}
 			cookie domain adamnor.com
+			enable identity store localdb
 			ui {
 				links {
 					"Dashboard" https://adamnor.com/ icon "las la-star"
@@ -22,7 +27,6 @@
 					"Admins" https://assetq.adamnor.com/admins icon "las la-star"
 					"My Identity" "/whoami" icon "las la-user"
 				}
-				password_recovery_enabled yes
 			}
 			transform user {
 				match origin local
@@ -134,9 +138,9 @@ www.adamnor.com {
 
 adamnor.com {
 	import tls_config
-	route {
-		authorize with users_policy
-	}
+	# route {
+	# 	authorize with users_policy
+	# }
 	root * /srv/sites/landing-page
 	file_server
 }
@@ -149,4 +153,9 @@ jellyfin.adamnor.com {
 status.adamnor.com {
 	import tls_config
 	reverse_proxy localhost:3001
+}
+
+ipa.adamnor.com {
+	import tls_config
+	reverse_proxy 192.168.1.21:443
 }
