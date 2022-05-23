@@ -45,6 +45,9 @@ services:
       - 7359:7359/udp # allow clients to discover jellyfin
       - 1900:1900/udp # discover by DNLA and clients
 
+      # Jellyseerr
+      - 5055:5055
+
       # Caddy Reverse proxy
       - 80:80 # http
       - 443:443 # https
@@ -178,6 +181,19 @@ services:
     # - 7359:7359/udp # allow clients to discover jellyfin
     # - 1900:1900/udp # discover by DNLA and clients
     restart: unless-stopped
+
+  jellyseerr:
+      image: fallenbagel/jellyseerr:latest
+      container_name: jellyseerr
+      network_mode: "service:gluetun"
+      environment:
+          - LOG_LEVEL=debug
+          - TZ=${TZ} # Specify a timezone to use
+      volumes:
+      - ${CONFIG_PATH}/jellyseerr:/config
+      # ports:
+      #     - 5055:5055
+      restart: unless-stopped
 
   uptime-kuma:
     image: louislam/uptime-kuma
