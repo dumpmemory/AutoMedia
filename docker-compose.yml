@@ -220,7 +220,7 @@ services:
     restart: unless-stopped
 
   caddy:
-    image: caddy-acs # Build from cadd/Dockerfile
+    image: ghcr.io/greenpau/authp:v1.1.10
     container_name: caddy
     network_mode: "service:gluetun"
     environment:
