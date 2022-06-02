@@ -159,3 +159,8 @@ ipa.adamnor.com {
 	import tls_config
 	reverse_proxy 192.168.1.21:443
 }
+
+request.adamnor.com {
+	import tls_config
+	reverse_proxy localhost:5055
+}
