@@ -45,9 +45,6 @@ services:
       # Jellyseerr
       - 5055:5055
 
-      # # EmbyStat
-      - 6555:6555
-
       # Caddy Reverse proxy
       - 80:80 # http
       - 443:443 # https
@@ -58,6 +55,7 @@ services:
     sysctls:
       - net.ipv6.conf.all.disable_ipv6=0
     environment:
+      - TZ=${TZ} # Timezone for accurate logs times
       # More variables are available, see the Wiki table
       - VPNSP=${VPNSP}
       - VPN_TYPE=${VPN_TYPE}
@@ -71,7 +69,6 @@ services:
       - WIREGUARD_PRIVATE_KEY=${WIREGUARD_PRIVATE_KEY}
       - WIREGUARD_ADDRESS=${WIREGUARD_ADDRESS}
 
-      - TZ=${TZ} # Timezone for accurate logs times
     restart: always
 
   deluge:
@@ -181,31 +178,17 @@ services:
     restart: unless-stopped
 
   jellyseerr:
-      image: fallenbagel/jellyseerr:latest
-      container_name: jellyseerr
-      network_mode: "service:gluetun"
-      environment:
-          - LOG_LEVEL=debug
-          - TZ=${TZ} # Specify a timezone to use
-      volumes:
+    image: fallenbagel/jellyseerr:latest
+    container_name: jellyseerr
+    network_mode: "service:gluetun"
+    environment:
+      - LOG_LEVEL=debug
+      - TZ=${TZ} # Specify a timezone to use
+    volumes:
       - ${CONFIG_PATH}/jellyseerr:/app/config
       # ports:
       #     - 5055:5055
-      restart: unless-stopped
-
-  embystat:
-      image: uping/embystat:beta
-      container_name: embystat
-      network_mode: "service:gluetun"
-      environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ} # Specify a timezone to use
-      volumes:
-      - ${CONFIG_PATH}/embystat:/config
-      # ports:
-      #   - 6555:6555
-      restart: unless-stopped
+    restart: unless-stopped
 
   uptime-kuma:
     image: louislam/uptime-kuma
