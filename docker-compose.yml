@@ -157,12 +157,10 @@ services:
     restart: unless-stopped
 
   jellyfin:
-    image: jellyfin/jellyfin:10.8.0-beta3
+    image: jellyfin/jellyfin:10.8.1
     container_name: jellyfin
     network_mode: "service:gluetun"
     user: 1000:1000
-    group_add:
-      - 18
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
